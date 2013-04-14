@@ -1,13 +1,11 @@
 package jp.goos.sample;
 
 import static jp.goos.sample.FakeAuctionServer.XMPP_HOSTNAME;
+import jp.goos.sample.ui.MainWindow;
 
 public class ApplicationRunner {
     public static final String SNIPER_ID = "sniper";
     public static final String SNIPER_PASSWORD = "sniper";
-    
-    public static final String STATUS_JOINING = "joining";
-    public static final String STATUS_LOST = "lost";
     
     private AuctionSniperDriver driver;
     
@@ -24,11 +22,11 @@ public class ApplicationRunner {
         thread.setDaemon(true);
         thread.start();
         driver = new AuctionSniperDriver(1000);
-        driver.showsSniperStatus(STATUS_JOINING);
+        driver.showsSniperStatus(MainWindow.STATUS_JOINING);
     }
     
     public void showsSniperHasLostAuction() {
-        driver.showsSniperStatus(STATUS_LOST);
+        driver.showsSniperStatus(MainWindow.STATUS_LOST);
     }
     
     public void stop() {
