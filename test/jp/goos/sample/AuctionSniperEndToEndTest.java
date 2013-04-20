@@ -11,7 +11,8 @@ public class AuctionSniperEndToEndTest {
     @Test public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {
         auction.startSellingItem();
         application.startBinddingIn(auction);
-        auction.hasReceivedJoinRequestFromSniper();
+        // メソッドシグネチャの変更に応じて、ここも修正（P113）
+        auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID);
         auction.announceClosed();
         application.showsSniperHasLostAuction();
     }
@@ -20,12 +21,12 @@ public class AuctionSniperEndToEndTest {
         auction.startSellingItem();
         
         application.startBinddingIn(auction);
-        auction.hasReceivedJoinRequestFromSniper();
+        auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID);
         
         auction.reportPrice(1000, 98, "other bidder");
         
         application.hasShownSniperIsBidding();
-        auction.hasReceiveBid(1098, ApplicationRunner.SNIPERXMPP_ID);
+        auction.hasReceiveBid(1098, ApplicationRunner.SNIPER_XMPP_ID);
         
         auction.announceClosed();
         application.showsSniperHasLostAuction();
