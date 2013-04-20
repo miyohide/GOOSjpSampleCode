@@ -1,4 +1,4 @@
-package jp.goos.sample;
+package test.endtoend.auctionsniper;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
+import jp.goos.sample.Main;
 import org.hamcrest.Matcher;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;

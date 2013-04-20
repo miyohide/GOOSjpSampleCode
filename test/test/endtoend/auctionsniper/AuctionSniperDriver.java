@@ -1,4 +1,4 @@
-package jp.goos.sample;
+package test.endtoend.auctionsniper;
 
 import static org.hamcrest.Matchers.equalTo;
 

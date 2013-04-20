@@ -1,4 +1,4 @@
-package jp.goos.sample;
+package test.endtoend.auctionsniper;
 
 import org.junit.After;
 import org.junit.Test;

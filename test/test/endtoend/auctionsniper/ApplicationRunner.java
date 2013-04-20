@@ -1,6 +1,7 @@
-package jp.goos.sample;
+package test.endtoend.auctionsniper;
 
-import static jp.goos.sample.FakeAuctionServer.XMPP_HOSTNAME;
+import jp.goos.sample.Main;
+import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 import jp.goos.sample.ui.MainWindow;
 
 public class ApplicationRunner {
