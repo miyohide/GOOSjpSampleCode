@@ -16,6 +16,21 @@ public class AuctionSniperEndToEndTest {
         application.showsSniperHasLostAuction();
     }
     
+    @Test public void sniperMakesAHigherBidButLoses() throws Exception {
+        auction.startSellingItem();
+        
+        application.startBinddingIn(auction);
+        auction.hasReceivedJoinRequestFromSniper();
+        
+        auction.reportPrice(1000, 98, "other bidder");
+        
+        application.hasShownSniperIsBidding();
+        auction.hasReceiveBid(1098, ApplicationRunner.SNIPERXMPP_ID);
+        
+        auction.announceClosed();
+        application.showsSniperHasLostAuction();
+    }
+    
     // 追加のクリーンアップ
     @After public void stopAuction() {
         auction.stop();
