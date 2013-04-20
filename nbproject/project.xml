@@ -9,6 +9,7 @@
             </source-roots>
             <test-roots>
                 <root id="test.end-to-end.dir"/>
+                <root id="test.unit.dir"/>
             </test-roots>
         </data>
     </configuration>
