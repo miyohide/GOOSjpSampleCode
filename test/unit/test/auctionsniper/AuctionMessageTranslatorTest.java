@@ -1,5 +1,6 @@
 package test.auctionsniper;
 
+import jp.goos.sample.AuctionMessageTranslator;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
 import org.junit.Test;
