@@ -1,7 +1,7 @@
 package test.auctionsniper;
 
-import jp.goos.sample.AuctionEventListener;
-import jp.goos.sample.AuctionMessageTranslator;
+import actionsniper.AuctionEventListener;
+import actionsniper.AuctionMessageTranslator;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
 import org.jmock.Expectations;

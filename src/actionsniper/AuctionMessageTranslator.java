@@ -1,5 +1,4 @@
-// TODO: Packageは後ほど変更する
-package jp.goos.sample;
+package actionsniper;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;

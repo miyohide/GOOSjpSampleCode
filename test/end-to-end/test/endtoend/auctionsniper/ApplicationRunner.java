@@ -1,6 +1,6 @@
 package test.endtoend.auctionsniper;
 
-import jp.goos.sample.Main;
+import actionsniper.Main;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 import jp.goos.sample.ui.MainWindow;
 

@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
-import jp.goos.sample.Main;
+import actionsniper.Main;
 import org.hamcrest.Matcher;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;

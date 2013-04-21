@@ -1,4 +1,4 @@
-package jp.goos.sample;
+package actionsniper;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

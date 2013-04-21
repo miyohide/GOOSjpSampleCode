@@ -1,5 +1,4 @@
-// TODO: パッケージ名の変更
-package jp.goos.sample;
+package actionsniper;
 
 public interface AuctionEventListener {
     public void auctionClosed();
