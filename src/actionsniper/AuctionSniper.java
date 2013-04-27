@@ -2,7 +2,6 @@ package actionsniper;
 
 // 第13章にて導入。Mainクラスから処理を抽出。
 
-import javax.swing.SwingUtilities;
 import jp.goos.sample.ui.MainWindow;
 
 public class AuctionSniper implements AuctionEventListener {
