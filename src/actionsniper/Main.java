@@ -49,6 +49,10 @@ public class Main {
         this.notToBeGCd = chat;
 
         Auction auction = new XMPPAuction(chat);
+        /* P137のサンプルコードでは、AuctionMessangeTranslatorのコンストラクタとして
+         * 2つの引数を散り、connection.getUser()を第一引数としているが、現状では
+         * 実装と異なるため、現状はこのままとする。
+         */
         chat.addMessageListener(
                 new AuctionMessageTranslator(
                 new AuctionSniper(auction, new SniperStateDisplayer())));
