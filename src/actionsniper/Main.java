@@ -40,10 +40,17 @@ public class Main implements SniperListener {
 
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
         // ウィンドウをクローズしたとき、クライアントとの接続も切る
+
+        /* コンパイルを通すためにAuctionを実装したクラスを作成し、そのインスタンスを
+         * AuctionSniperの引数に使用する
+         */
+        Auction nullAuction = new Auction() {
+            public void bid(int amount) {}
+        };
         disconnectWhenUICloses(connection);
         final Chat chat = connection.getChatManager().createChat(
                 auctionId(itemId, connection),
-                new AuctionMessageTranslator(new AuctionSniper(null, this)));
+                new AuctionMessageTranslator(new AuctionSniper(nullAuction, this)));
         this.notToBeGCd = chat;
         chat.sendMessage(JOIN_COMMAND_FORMAT);
      }
@@ -88,7 +95,11 @@ public class Main implements SniperListener {
 
     @Override
     public void sniperBidding() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                ui.showStatus(MainWindow.STATUS_BIDDING);
+            }
+        });
     }
 
 }
