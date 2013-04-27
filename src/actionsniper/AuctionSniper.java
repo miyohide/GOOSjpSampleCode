@@ -5,9 +5,6 @@ package actionsniper;
 import javax.swing.SwingUtilities;
 import jp.goos.sample.ui.MainWindow;
 
-/*
- * 第13章にて導入。P128の時点ではまだMainから移動はしていない。
- */
 public class AuctionSniper implements AuctionEventListener {
     private MainWindow ui;
     private final SniperListener sniperListener;
@@ -18,11 +15,8 @@ public class AuctionSniper implements AuctionEventListener {
 
     @Override
     public void auctionClosed() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                ui.showStatus(MainWindow.STATUS_LOST);
-            }
-        });
+        // Mainにあった実装をsniperListenerの実装に委譲。
+        sniperListener.sniperLost();
     }
 
     @Override

@@ -10,7 +10,7 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
-public class Main implements AuctionEventListener {
+public class Main implements SniperListener {
     @SuppressWarnings("unused") private Chat notToBeGCd;
     
     private static final int ARG_HOSTNAME = 0;
@@ -43,7 +43,7 @@ public class Main implements AuctionEventListener {
         disconnectWhenUICloses(connection);
         final Chat chat = connection.getChatManager().createChat(
                 auctionId(itemId, connection),
-                new AuctionMessageTranslator(this));
+                new AuctionMessageTranslator(new AuctionSniper(this)));
         this.notToBeGCd = chat;
         chat.sendMessage(JOIN_COMMAND_FORMAT);
      }
@@ -77,7 +77,8 @@ public class Main implements AuctionEventListener {
         });
     }
 
-    public void auctionClosed() {
+    @Override
+    public void sniperLost() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 ui.showStatus(MainWindow.STATUS_LOST);
@@ -85,9 +86,4 @@ public class Main implements AuctionEventListener {
         });
     }
 
-    @Override
-    public void currentPrice(int price, int increment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
