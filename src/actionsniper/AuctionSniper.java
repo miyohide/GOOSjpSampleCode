@@ -8,7 +8,7 @@ public class AuctionSniper implements AuctionEventListener {
     private MainWindow ui;
     private final SniperListener sniperListener;
     
-    public AuctionSniper(SniperListener sniperListener) {
+    public AuctionSniper(Auction auction, SniperListener sniperListener) {
         this.sniperListener = sniperListener;
     }
 
@@ -20,7 +20,10 @@ public class AuctionSniper implements AuctionEventListener {
 
     @Override
     public void currentPrice(int price, int increment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /* bidsHigherAndReportsBiddingWhenNewPriceArrives()で呼び出しているため、
+         * 一旦、未実装を表す処理をコメント化
+         */
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

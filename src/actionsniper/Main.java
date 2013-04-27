@@ -43,7 +43,7 @@ public class Main implements SniperListener {
         disconnectWhenUICloses(connection);
         final Chat chat = connection.getChatManager().createChat(
                 auctionId(itemId, connection),
-                new AuctionMessageTranslator(new AuctionSniper(this)));
+                new AuctionMessageTranslator(new AuctionSniper(null, this)));
         this.notToBeGCd = chat;
         chat.sendMessage(JOIN_COMMAND_FORMAT);
      }
@@ -84,6 +84,11 @@ public class Main implements SniperListener {
                 ui.showStatus(MainWindow.STATUS_LOST);
             }
         });
+    }
+
+    @Override
+    public void sniperBidding() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
