@@ -10,7 +10,7 @@ public class AuctionMessageTranslator implements MessageListener {
 
     private AuctionEventListener listener;
 
-    public AuctionMessageTranslator(AuctionEventListener listener) {
+    public AuctionMessageTranslator(String sniper_id, AuctionEventListener listener) {
         this.listener = listener;
     }
 
@@ -22,7 +22,7 @@ public class AuctionMessageTranslator implements MessageListener {
             listener.auctionClosed();
         } else if ("PRICE".equals(eventType)) {
             listener.currentPrice(Integer.parseInt(event.get("CurrentPrice")),
-                    Integer.parseInt(event.get("Increment")));
+                    Integer.parseInt(event.get("Increment")), null);
         }
     }
 

@@ -31,6 +31,6 @@ public class AuctionSniperTest {
             atLeast(1).of(sniperListener).sniperBidding();
         }});
         
-        sniper.currentPrice(price, increment);
+        sniper.currentPrice(price, increment, null);
     }
 }
