@@ -44,7 +44,7 @@ public class AuctionSniperTest {
             atLeast(1).of(sniperListener).sniperWon();  when(sniperState.is("winning"));
         }});
 
-        sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
+        sniper.currentPrice(123, 45, PriceSource.FromSniper);
         sniper.auctionClosed();
     }
 
