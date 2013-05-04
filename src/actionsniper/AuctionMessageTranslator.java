@@ -29,7 +29,7 @@ public class AuctionMessageTranslator implements MessageListener {
         }
     }
 
-    private static class AuctionEvent {
+    public static class AuctionEvent {
 
         private final Map<String, String> fields = new HashMap<String, String>();
 
