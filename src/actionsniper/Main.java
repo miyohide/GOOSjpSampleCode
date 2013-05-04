@@ -96,6 +96,11 @@ public class Main {
             showStatus(MainWindow.STATUS_BIDDING);
         }
 
+        @Override
+        public void sniperWinning() {
+            // まだ中身は書かない
+        }
+
         private void showStatus(final String status) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {

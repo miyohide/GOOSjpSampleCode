@@ -1,6 +1,7 @@
 package test.auctionsniper;
 
 import actionsniper.Auction;
+import actionsniper.AuctionEventListener.PriceSource;
 import actionsniper.AuctionSniper;
 import actionsniper.SniperListener;
 import org.jmock.Expectations;
@@ -32,5 +33,12 @@ public class AuctionSniperTest {
         }});
         
         sniper.currentPrice(price, increment, null);
+    }
+    
+    @Test public void reportsIsWinningWhenCurrentPriceComesFromSniper() {
+        context.checking(new Expectations() {{
+            atLeast(1).of(sniperListener).sniperWinning();
+        }});
+        sniper.currentPrice(123, 45, PriceSource.FromSniper);
     }
 }

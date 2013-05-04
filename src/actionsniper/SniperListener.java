@@ -10,4 +10,6 @@ public interface SniperListener extends EventListener {
 
     // コンパイルを通すために追加。
     public void sniperBidding();
+
+    public void sniperWinning();
 }
