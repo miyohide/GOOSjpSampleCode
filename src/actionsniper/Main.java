@@ -98,12 +98,12 @@ public class Main {
 
         @Override
         public void sniperWinning() {
-            // まだ中身は書かない
+            showStatus(MainWindow.STATUS_WINNING);
         }
 
         @Override
         public void sniperWon() {
-            // まだ中身は書かない
+            showStatus(MainWindow.STATUS_WON);
         }
 
         private void showStatus(final String status) {
