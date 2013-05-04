@@ -101,6 +101,11 @@ public class Main {
             // まだ中身は書かない
         }
 
+        @Override
+        public void sniperWon() {
+            // まだ中身は書かない
+        }
+
         private void showStatus(final String status) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {

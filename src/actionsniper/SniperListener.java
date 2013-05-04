@@ -8,8 +8,9 @@ import java.util.EventListener;
 public interface SniperListener extends EventListener {
     void sniperLost();
 
-    // コンパイルを通すために追加。
     public void sniperBidding();
 
     public void sniperWinning();
+
+    public void sniperWon();
 }
