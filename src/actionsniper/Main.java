@@ -92,7 +92,7 @@ public class Main {
         }
 
         @Override
-        public void sniperBidding() {
+        public void sniperBidding(SniperState sniper_state) {
             showStatus(MainWindow.STATUS_BIDDING);
         }
 
