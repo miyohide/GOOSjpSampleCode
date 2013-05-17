@@ -39,15 +39,16 @@ public class AuctionSniperEndToEndTest {
         auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID);
         
         auction.reportPrice(1000, 98, "other bidder");
-        application.hasShownSniperIsBidding();
+        // 最新価格、最新入札額
+        application.hasShownSniperIsBidding(1000, 1098);
 
         auction.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);
         
         auction.reportPrice(1098, 97, ApplicationRunner.SNIPER_XMPP_ID);
-        application.hasShownSniperIsWinning();
+        application.hasShownSniperIsWinning(1098); // 落札時の入札額
         
         auction.announceClosed();
-        application.showsSniperHasWonAuction();
+        application.showsSniperHasWonAuction(1098); // 最新価格
     }
     
     // 追加のクリーンアップ
