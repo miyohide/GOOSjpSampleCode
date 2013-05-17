@@ -30,8 +30,8 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
 
-    public void showStatus(String status) {
-        snipers.setStatusText(status);
+    public void showStatusText(String statusText) {
+        snipers.setStatusText(statusText);
     }
 
     private void fillContentPane(JTable snipersTable) {
