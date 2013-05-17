@@ -5,7 +5,6 @@ import static com.objogate.wl.swing.matcher.JLabelTextMatcher.withLabelText;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
 import com.objogate.wl.swing.driver.JFrameDriver;
-import com.objogate.wl.swing.driver.JLabelDriver;
 import com.objogate.wl.swing.driver.JTableDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
 import jp.goos.sample.ui.MainWindow;
