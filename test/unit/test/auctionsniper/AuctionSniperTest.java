@@ -1,11 +1,14 @@
 package test.auctionsniper;
 
+import static org.hamcrest.Matchers.equalTo;
 import actionsniper.Auction;
 import actionsniper.AuctionEventListener.PriceSource;
 import actionsniper.AuctionSniper;
 import actionsniper.SniperListener;
 import actionsniper.SniperSnapshot;
 import actionsniper.SniperState;
+import org.hamcrest.FeatureMatcher;
+import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.States;
@@ -32,7 +35,8 @@ public class AuctionSniperTest {
     @Test public void reportsLostIfAuctionClosesWhenBidding() {
         context.checking(new Expectations() {{
             ignoring(auction);
-            allowing(sniperListener).sniperBidding(with(any(SniperSnapshot.class))); then(sniperState.is("bidding"));
+            allowing(sniperListener).sniperStateChanged(
+                    with(aSniperThatIs(SniperState.BIDDING))); then(sniperState.is("bidding"));
             atLeast(1).of(sniperListener).sniperLost(); when(sniperState.is("bidding"));
         }});
 
@@ -57,7 +61,7 @@ public class AuctionSniperTest {
         final int bid = price + increment;
         context.checking(new Expectations() {{
             one(auction).bid(bid);
-            atLeast(1).of(sniperListener).sniperBidding(
+            atLeast(1).of(sniperListener).sniperStateChanged(
                     new SniperSnapshot(ITEM_ID, price, bid, SniperState.BIDDING));
         }});
         
@@ -69,5 +73,15 @@ public class AuctionSniperTest {
             atLeast(1).of(sniperListener).sniperWinning();
         }});
         sniper.currentPrice(123, 45, PriceSource.FromSniper);
+    }
+    
+    private Matcher<SniperSnapshot> aSniperThatIs(final SniperState state) {
+        return new FeatureMatcher<SniperSnapshot, SniperState>(
+                equalTo(state), "sniper that is ", "was") {
+                    @Override
+                    protected SniperState featureValueOf(SniperSnapshot actual) {
+                        return actual.state;
+                    }
+                };
     }
 }

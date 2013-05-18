@@ -8,9 +8,9 @@ import java.util.EventListener;
 public interface SniperListener extends EventListener {
     void sniperLost();
 
-    public void sniperBidding(SniperSnapshot sniperSnapshot);
-
     public void sniperWinning();
 
     public void sniperWon();
+
+    public void sniperStateChanged(SniperSnapshot snapshot);
 }
