@@ -5,6 +5,7 @@ import actionsniper.AuctionEventListener.PriceSource;
 import actionsniper.AuctionSniper;
 import actionsniper.SniperListener;
 import actionsniper.SniperSnapshot;
+import actionsniper.SniperState;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.States;
@@ -57,7 +58,7 @@ public class AuctionSniperTest {
         context.checking(new Expectations() {{
             one(auction).bid(bid);
             atLeast(1).of(sniperListener).sniperBidding(
-                    new SniperSnapshot(ITEM_ID, price, bid));
+                    new SniperSnapshot(ITEM_ID, price, bid, SniperState.BIDDING));
         }});
         
         sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);

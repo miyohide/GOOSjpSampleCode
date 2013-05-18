@@ -4,7 +4,7 @@ import actionsniper.SniperSnapshot;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel {
-    private final static SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0);
+    private final static SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0, null);
     private String statusText = MainWindow.STATUS_JOINING;
     private SniperSnapshot sniperState = STARTING_UP;
     
