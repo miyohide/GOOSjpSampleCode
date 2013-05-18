@@ -1,5 +1,6 @@
 package jp.goos.sample.ui;
 
+import actionsniper.SniperState;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -52,5 +53,10 @@ public class MainWindow extends JFrame {
         result.setName(SNIPER_STATUS_NAME);
         result.setBorder(new LineBorder(Color.BLACK));
         return result;
+    }
+
+    public void sniperStatusChanged(SniperState sniperState, String statusText) {
+        // P162 ここでは下記の実装をするとsnipersにsniperStatusChangedが未実装であるためコンパイルエラーとなる
+        // snipers.sniperStatusChanged(sniperState, statusText);
     }
 }
