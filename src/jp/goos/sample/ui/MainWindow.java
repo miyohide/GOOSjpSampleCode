@@ -56,7 +56,6 @@ public class MainWindow extends JFrame {
     }
 
     public void sniperStatusChanged(SniperState sniperState, String statusText) {
-        // P162 ここでは下記の実装をするとsnipersにsniperStatusChangedが未実装であるためコンパイルエラーとなる
-        // snipers.sniperStatusChanged(sniperState, statusText);
+        snipers.sniperStatusChanged(sniperState, statusText);
     }
 }
