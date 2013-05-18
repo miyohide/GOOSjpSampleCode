@@ -47,11 +47,15 @@ public class AuctionSniperTest {
     @Test public void reportsWonIfAuctionClosesWhenWinning() {
         context.checking(new Expectations() {{
             ignoring(auction);
-            allowing(sniperListener).sniperWinning();   then(sniperState.is("winning"));
-            atLeast(1).of(sniperListener).sniperWon();  when(sniperState.is("winning"));
+            allowing(sniperListener).sniperStateChanged(
+                    with(aSniperThatIs(SniperState.BIDDING))); then(sniperState.is("bidding"));
+            allowing(sniperListener).sniperStateChanged(
+                    with(aSniperThatIs(SniperState.WINNING))); then (sniperState.is("winning"));
+            atLeast(1).of(sniperListener).sniperWon(); when(sniperState.is("winning"));
         }});
 
-        sniper.currentPrice(123, 45, PriceSource.FromSniper);
+        sniper.currentPrice(123, 12, PriceSource.FromOtherBidder);
+        sniper.currentPrice(135, 45, PriceSource.FromSniper);
         sniper.auctionClosed();
     }
 
