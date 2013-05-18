@@ -1,12 +1,12 @@
 package jp.goos.sample.ui;
 
-import actionsniper.SniperState;
+import actionsniper.SniperSnapshot;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel {
-    private final static SniperState STARTING_UP = new SniperState("", 0, 0);
+    private final static SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0);
     private String statusText = MainWindow.STATUS_JOINING;
-    private SniperState sniperState = STARTING_UP;
+    private SniperSnapshot sniperState = STARTING_UP;
     
     @Override
     public int getColumnCount() {
@@ -34,8 +34,8 @@ public class SnipersTableModel extends AbstractTableModel {
         }
     }
     
-    public void sniperStatusChanged(SniperState newSniperState, String newStatusText) {
-        sniperState = newSniperState;
+    public void sniperStatusChanged(SniperSnapshot newSniperSnapshot, String newStatusText) {
+        sniperState = newSniperSnapshot;
         statusText = newStatusText;
         fireTableRowsUpdated(0, 0);
     }
