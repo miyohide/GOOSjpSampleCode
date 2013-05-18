@@ -4,6 +4,10 @@ import actionsniper.SniperSnapshot;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel {
+    private static String[] STATUS_TEXT = {
+        MainWindow.STATUS_JOINING,
+        MainWindow.STATUS_BIDDING
+    };
     private final static SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0, null);
     private String statusText = MainWindow.STATUS_JOINING;
     private SniperSnapshot sniperState = STARTING_UP;
@@ -36,7 +40,7 @@ public class SnipersTableModel extends AbstractTableModel {
     
     public void sniperStatusChanged(SniperSnapshot newSniperSnapshot, String newStatusText) {
         sniperState = newSniperSnapshot;
-        statusText = newStatusText;
+        this.statusText = STATUS_TEXT[newSniperSnapshot.sniperState.ordinal()];
         fireTableRowsUpdated(0, 0);
     }
 
