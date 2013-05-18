@@ -18,7 +18,7 @@ public class AuctionSniperTest {
     private final Mockery context = new Mockery();
     private final SniperListener sniperListener = context.mock(SniperListener.class);
     private final Auction auction = context.mock(Auction.class);
-    private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
+    private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener, ITEM_ID);
     private final States sniperState = context.states("sniper");
     
     @Test public void reportsLostIfAuctionClosesImmediately() {
@@ -31,8 +31,7 @@ public class AuctionSniperTest {
     @Test public void reportsLostIfAuctionClosesWhenBidding() {
         context.checking(new Expectations() {{
             ignoring(auction);
-            // sniperBiddingにnullを入れているのはコンパイルを通すため
-            allowing(sniperListener).sniperBidding(null); then(sniperState.is("bidding"));
+            allowing(sniperListener).sniperBidding(with(any(SniperState.class))); then(sniperState.is("bidding"));
             atLeast(1).of(sniperListener).sniperLost(); when(sniperState.is("bidding"));
         }});
 
