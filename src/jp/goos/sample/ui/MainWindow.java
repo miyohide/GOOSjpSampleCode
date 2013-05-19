@@ -31,10 +31,6 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
 
-    public void showStatusText(String statusText) {
-        snipers.setStatusText(statusText);
-    }
-
     private void fillContentPane(JTable snipersTable) {
         final Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
