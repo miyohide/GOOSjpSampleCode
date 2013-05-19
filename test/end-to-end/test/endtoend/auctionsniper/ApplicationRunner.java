@@ -1,6 +1,6 @@
 package test.endtoend.auctionsniper;
-
 import actionsniper.Main;
+import actionsniper.SniperState;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 import jp.goos.sample.ui.MainWindow;
 import jp.goos.sample.ui.SnipersTableModel;
@@ -28,7 +28,10 @@ public class ApplicationRunner {
         thread.setDaemon(true);
         thread.start();
         driver = new AuctionSniperDriver(1000);
-        driver.showsSniperStatus(SnipersTableModel.STATUS_JOINING);
+        driver.hasTitle(MainWindow.APPLICATION_TITLE);
+        driver.hasColumnTitles();
+        driver.showsSniperStatus(
+                SnipersTableModel.textFor(SniperState.JOINING));
     }
     
     public void showsSniperHasLostAuction() {
