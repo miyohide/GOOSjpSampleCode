@@ -14,7 +14,6 @@ public class SnipersTableModel extends AbstractTableModel {
     private static String[] STATUS_TEXT = {
         STATUS_JOINING, STATUS_BIDDING, STATUS_WINNING, STATUS_LOST, STATUS_WON};
     private final static SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0, SniperState.JOINING);
-    private String statusText = STATUS_JOINING;
     private SniperSnapshot sniperState = STARTING_UP;
     
     @Override
@@ -45,7 +44,6 @@ public class SnipersTableModel extends AbstractTableModel {
     
     public void sniperStateChanged(SniperSnapshot newSniperSnapshot) {
         sniperState = newSniperSnapshot;
-        this.statusText = STATUS_TEXT[newSniperSnapshot.state.ordinal()];
         fireTableRowsUpdated(0, 0);
     }
 
