@@ -42,7 +42,7 @@ public class SnipersTableModel extends AbstractTableModel {
         }
     }
     
-    public void sniperStateChanged(SniperSnapshot newSniperSnapshot, String newStatusText) {
+    public void sniperStateChanged(SniperSnapshot newSniperSnapshot) {
         sniperState = newSniperSnapshot;
         this.statusText = STATUS_TEXT[newSniperSnapshot.state.ordinal()];
         fireTableRowsUpdated(0, 0);
