@@ -4,15 +4,16 @@ import actionsniper.SniperSnapshot;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel {
+    public static final String STATUS_WON = "won";
+    public static final String STATUS_JOINING = "joining";
+    public static final String STATUS_LOST = "lost";
+    public static final String STATUS_BIDDING = "bidding";
+    public static final String STATUS_WINNING = "winning";
+
     private static String[] STATUS_TEXT = {
-        MainWindow.STATUS_JOINING,
-        MainWindow.STATUS_BIDDING,
-        MainWindow.STATUS_WINNING,
-        MainWindow.STATUS_LOST,
-        MainWindow.STATUS_WON
-    };
+        STATUS_JOINING, STATUS_BIDDING, STATUS_WINNING, STATUS_LOST, STATUS_WON};
     private final static SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0, null);
-    private String statusText = MainWindow.STATUS_JOINING;
+    private String statusText = STATUS_JOINING;
     private SniperSnapshot sniperState = STARTING_UP;
     
     @Override

@@ -4,6 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.SwingUtilities;
 import jp.goos.sample.ui.MainWindow;
+import jp.goos.sample.ui.SnipersTableModel;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
@@ -90,7 +91,7 @@ public class Main {
         public void sniperStateChanged(final SniperSnapshot sniperSnapshot) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    ui.sniperStatusChanged(sniperSnapshot, MainWindow.STATUS_BIDDING);
+                    ui.sniperStatusChanged(sniperSnapshot, SnipersTableModel.STATUS_BIDDING);
                 }
             });
         }

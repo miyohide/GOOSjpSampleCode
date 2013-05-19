@@ -39,12 +39,12 @@ public class SnipersTableModelTest {
             one(listener).tableChanged(with(aRowChangedEvent()));
         }});
         
-        model.sniperStateChanged(new SniperSnapshot("item id", 555, 666, SniperState.BIDDING), MainWindow.STATUS_BIDDING);
+        model.sniperStateChanged(new SniperSnapshot("item id", 555, 666, SniperState.BIDDING), SnipersTableModel.STATUS_BIDDING);
         
         assertColumnEquals(Column.ITEM_IDENTIFIER, "item id");
         assertColumnEquals(Column.LAST_PRICE, 555);
         assertColumnEquals(Column.LAST_BID, 666);
-        assertColumnEquals(Column.SNIPER_STATE, MainWindow.STATUS_BIDDING);
+        assertColumnEquals(Column.SNIPER_STATE, SnipersTableModel.STATUS_BIDDING);
     }
     
     private void assertColumnEquals(Column column, Object expected) {

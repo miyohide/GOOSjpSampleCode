@@ -3,6 +3,7 @@ package test.endtoend.auctionsniper;
 import actionsniper.Main;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 import jp.goos.sample.ui.MainWindow;
+import jp.goos.sample.ui.SnipersTableModel;
 
 public class ApplicationRunner {
 
@@ -27,15 +28,15 @@ public class ApplicationRunner {
         thread.setDaemon(true);
         thread.start();
         driver = new AuctionSniperDriver(1000);
-        driver.showsSniperStatus(MainWindow.STATUS_JOINING);
+        driver.showsSniperStatus(SnipersTableModel.STATUS_JOINING);
     }
     
     public void showsSniperHasLostAuction() {
-        driver.showsSniperStatus(MainWindow.STATUS_LOST);
+        driver.showsSniperStatus(SnipersTableModel.STATUS_LOST);
     }
     
     public void showsSniperHasWonAuction() {
-        driver.showsSniperStatus(MainWindow.STATUS_WINNING);
+        driver.showsSniperStatus(SnipersTableModel.STATUS_WINNING);
     }
     
     public void stop() {
@@ -45,22 +46,22 @@ public class ApplicationRunner {
     }
 
     void hasShownSniperIsBidding() {
-        driver.showsSniperStatus(MainWindow.STATUS_BIDDING);
+        driver.showsSniperStatus(SnipersTableModel.STATUS_BIDDING);
     }
 
     public void hasShownSniperIsBidding(int lastPrice, int lastBid) {
-        driver.showsSniperStatus(itemId, lastPrice, lastBid, MainWindow.STATUS_BIDDING);
+        driver.showsSniperStatus(itemId, lastPrice, lastBid, SnipersTableModel.STATUS_BIDDING);
     }
     
     void hasShownSniperIsWinning() {
-        driver.showsSniperStatus(MainWindow.STATUS_WINNING);
+        driver.showsSniperStatus(SnipersTableModel.STATUS_WINNING);
     }
 
     public void hasShownSniperIsWinning(int winningBid) {
-        driver.showsSniperStatus(itemId, winningBid, winningBid, MainWindow.STATUS_WINNING);
+        driver.showsSniperStatus(itemId, winningBid, winningBid, SnipersTableModel.STATUS_WINNING);
     }
 
     public void showsSniperHasWonAuction(int lastPrice) {
-        driver.showsSniperStatus(itemId, lastPrice, lastPrice, MainWindow.STATUS_WON);
+        driver.showsSniperStatus(itemId, lastPrice, lastPrice, SnipersTableModel.STATUS_WON);
     }
 }
