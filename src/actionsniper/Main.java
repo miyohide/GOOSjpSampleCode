@@ -59,7 +59,7 @@ public class Main {
         chat.addMessageListener(
                 new AuctionMessageTranslator(
                 connection.getUser(),
-                new AuctionSniper(auction, new SwingThreadSniperListener(snipers), itemId)));
+                new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))));
         auction.join();
     }
 
