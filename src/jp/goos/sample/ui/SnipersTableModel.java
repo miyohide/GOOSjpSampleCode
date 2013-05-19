@@ -1,10 +1,11 @@
 package jp.goos.sample.ui;
 
+import actionsniper.SniperListener;
 import actionsniper.SniperSnapshot;
 import actionsniper.SniperState;
 import javax.swing.table.AbstractTableModel;
 
-public class SnipersTableModel extends AbstractTableModel {
+public class SnipersTableModel extends AbstractTableModel implements SniperListener {
     public static final String STATUS_WON = "Won";
     public static final String STATUS_JOINING = "Joining";
     public static final String STATUS_LOST = "Lost";

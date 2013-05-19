@@ -5,6 +5,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.SwingUtilities;
 import jp.goos.sample.ui.MainWindow;
 import jp.goos.sample.ui.SnipersTableModel;
+import jp.goos.sample.ui.SwingThreadSniperListener;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
@@ -23,10 +24,15 @@ public class Main {
             ITEM_ID_AS_LOGIN + "@%s/" + AUCTION_RESOURCE;
     public static final String JOIN_COMMAND_FORMAT = "SOLVersion: 1.1; Command: JOIN;";
     public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
+    private final SnipersTableModel snipers = new SnipersTableModel();
     private MainWindow ui;
 
     public Main() throws Exception {
-        startUserInterface();
+        SwingUtilities.invokeAndWait(new Runnable() {
+            public void run() {
+                ui = new MainWindow(snipers);
+            }
+        });
     }
 
     public static void main(String... args) throws Exception {
@@ -53,7 +59,7 @@ public class Main {
         chat.addMessageListener(
                 new AuctionMessageTranslator(
                 connection.getUser(),
-                new AuctionSniper(auction, new SniperStateDisplayer(), itemId)));
+                new AuctionSniper(auction, new SwingThreadSniperListener(snipers), itemId)));
         auction.join();
     }
 
@@ -69,14 +75,6 @@ public class Main {
         return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
     }
 
-    private void startUserInterface() throws Exception {
-        SwingUtilities.invokeAndWait(new Runnable() {
-            public void run() {
-                ui = new MainWindow();
-            }
-        });
-    }
-
     private void disconnectWhenUICloses(final XMPPConnection connection) {
         ui.addWindowListener(new WindowAdapter() {
             @Override
@@ -84,16 +82,5 @@ public class Main {
                 connection.disconnect();
             }
         });
-    }
-
-    class SniperStateDisplayer implements SniperListener {
-        @Override
-        public void sniperStateChanged(final SniperSnapshot sniperSnapshot) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    ui.sniperStatusChanged(sniperSnapshot);
-                }
-            });
-        }
     }
 }
