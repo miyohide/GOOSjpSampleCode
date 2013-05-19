@@ -91,7 +91,7 @@ public class Main {
         public void sniperStateChanged(final SniperSnapshot sniperSnapshot) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    ui.sniperStatusChanged(sniperSnapshot, SnipersTableModel.STATUS_BIDDING);
+                    ui.sniperStatusChanged(sniperSnapshot);
                 }
             });
         }
