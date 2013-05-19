@@ -1,6 +1,7 @@
 package jp.goos.sample.ui;
 
 import actionsniper.SniperSnapshot;
+import actionsniper.SniperState;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel {
@@ -12,7 +13,7 @@ public class SnipersTableModel extends AbstractTableModel {
 
     private static String[] STATUS_TEXT = {
         STATUS_JOINING, STATUS_BIDDING, STATUS_WINNING, STATUS_LOST, STATUS_WON};
-    private final static SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0, null);
+    private final static SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0, SniperState.JOINING);
     private String statusText = STATUS_JOINING;
     private SniperSnapshot sniperState = STARTING_UP;
     
@@ -36,7 +37,7 @@ public class SnipersTableModel extends AbstractTableModel {
             case LAST_BID:
                 return sniperState.lastBid;
             case SNIPER_STATE:
-                return statusText;
+                return textFor(sniperState.state);
             default:
                 throw new IllegalArgumentException("No column at " + columnIndex);
         }
@@ -46,5 +47,9 @@ public class SnipersTableModel extends AbstractTableModel {
         sniperState = newSniperSnapshot;
         this.statusText = STATUS_TEXT[newSniperSnapshot.state.ordinal()];
         fireTableRowsUpdated(0, 0);
+    }
+
+    public static String textFor(SniperState state) {
+        return STATUS_TEXT[state.ordinal()];
     }
 }
