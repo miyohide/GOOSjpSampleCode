@@ -2,6 +2,8 @@ package actionsniper;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.SwingUtilities;
 import jp.goos.sample.ui.MainWindow;
 import jp.goos.sample.ui.SnipersTableModel;
@@ -13,7 +15,7 @@ import org.jivesoftware.smack.XMPPException;
 public class Main {
 
     @SuppressWarnings("unused")
-    private Chat notToBeGCd;
+    private List<Chat> notToBeGCd = new ArrayList<>();
     private static final int ARG_HOSTNAME = 0;
     private static final int ARG_USERNAME = 1;
     private static final int ARG_PASSWORD = 2;
@@ -37,9 +39,13 @@ public class Main {
 
     public static void main(String... args) throws Exception {
         Main main = new Main();
-        main.joinAuction(
-                connection(args[ARG_HOSTNAME], args[ARG_USERNAME],
-                args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
+        XMPPConnection connection =
+                connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
+        main.disconnectWhenUICloses(connection);
+
+        for (int i = 3; i < args.length; i++) {
+            main.joinAuction(connection, args[i]);
+        }
     }
 
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
@@ -53,7 +59,7 @@ public class Main {
          */
         final Chat chat = connection.getChatManager().createChat(
                 auctionId(itemId, connection), null);
-        this.notToBeGCd = chat;
+        this.notToBeGCd.add(chat);
 
         Auction auction = new XMPPAuction(chat);
         chat.addMessageListener(
