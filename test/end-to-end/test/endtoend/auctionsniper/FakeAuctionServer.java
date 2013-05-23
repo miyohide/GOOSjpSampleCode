@@ -1,9 +1,8 @@
 package test.endtoend.auctionsniper;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.hasProperty;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -92,8 +91,7 @@ public class FakeAuctionServer {
         
         public void receivesAMessage(Matcher<? super String> messageMatcher) throws InterruptedException {
             final Message message = messages.poll(5, TimeUnit.SECONDS);
-            assertThat("Message", message, is(notNullValue()));
-            assertThat(message.getBody(), messageMatcher);
+            assertThat(message, hasProperty("body", messageMatcher));
         }
     }
 }
