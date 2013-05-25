@@ -3,6 +3,9 @@ package jp.goos.sample.ui;
 import actionsniper.SniperListener;
 import actionsniper.SniperSnapshot;
 import actionsniper.SniperState;
+import actionsniper.util.Defect;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel implements SniperListener {
@@ -14,8 +17,7 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 
     private static String[] STATUS_TEXT = {
         STATUS_JOINING, STATUS_BIDDING, STATUS_WINNING, STATUS_LOST, STATUS_WON};
-    private final static SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0, SniperState.JOINING);
-    private SniperSnapshot snapshot = STARTING_UP;
+    private List<SniperSnapshot> snapshots = new ArrayList<>();
     
     @Override
     public int getColumnCount() {
@@ -24,12 +26,12 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 
     @Override
     public int getRowCount() {
-        return 1;
+        return snapshots.size();
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return Column.at(columnIndex).valueIn(snapshot);
+        return Column.at(columnIndex).valueIn(snapshots.get(rowIndex));
     }
     
     @Override
@@ -38,15 +40,27 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
     }
     
     public void sniperStateChanged(SniperSnapshot newSnapshot) {
-        snapshot = newSnapshot;
-        fireTableRowsUpdated(0, 0);
+        int row = rowMatching(newSnapshot);
+        snapshots.set(row, newSnapshot);
+        fireTableRowsUpdated(row, row);
     }
 
     public static String textFor(SniperState state) {
         return STATUS_TEXT[state.ordinal()];
     }
 
-    public void addSniper(SniperSnapshot joining) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addSniper(SniperSnapshot sniperSnapshot) {
+        snapshots.add(sniperSnapshot);
+        int row = snapshots.size() - 1;
+        fireTableRowsInserted(row, row);
+    }
+
+    private int rowMatching(SniperSnapshot newSnapshot) {
+        for (int i = 0; i < snapshots.size(); i++) {
+            if (newSnapshot.isForSameItemAs(snapshots.get(i))) {
+                return i;
+            }
+        }
+        throw new Defect("Cannot find match for " + newSnapshot);
     }
 }
