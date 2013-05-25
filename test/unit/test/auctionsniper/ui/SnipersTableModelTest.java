@@ -6,13 +6,13 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
+import static org.hamcrest.Matchers.hasProperty;
 
 import org.hamcrest.Matcher;
 import jp.goos.sample.ui.SnipersTableModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import jp.goos.sample.ui.Column;
-import jp.goos.sample.ui.MainWindow;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;
@@ -35,16 +35,18 @@ public class SnipersTableModelTest {
     }
     
     @Test public void setsSniperValuesInColumns() {
+        SniperSnapshot joining = SniperSnapshot.joining("item id");
+        SniperSnapshot bidding = joining.bidding(555, 666);
+
         context.checking(new Expectations() {{
-            one(listener).tableChanged(with(aRowChangedEvent()));
+            allowing(listener).tableChanged(with(anyInsertionEvent()));
+            one(listener).tableChanged(with(aChangeInRow(0)));
         }});
-        
+
+        model.addSniper(joining);
         model.sniperStateChanged(new SniperSnapshot("item id", 555, 666, SniperState.BIDDING));
-        
-        assertColumnEquals(Column.ITEM_IDENTIFIER, "item id");
-        assertColumnEquals(Column.LAST_PRICE, 555);
-        assertColumnEquals(Column.LAST_BID, 666);
-        assertColumnEquals(Column.SNIPER_STATE, SnipersTableModel.STATUS_BIDDING);
+
+        assertRowMatchesSnapshot(0, bidding);
     }
 
     @Test public void setsUpColumnHeadings() {
@@ -86,6 +88,14 @@ public class SnipersTableModelTest {
         assertEquals(snapshot.lastPrice, cellValue(row, Column.LAST_PRICE));
         assertEquals(snapshot.lastBid, cellValue(row, Column.LAST_BID));
         assertEquals(SnipersTableModel.textFor(snapshot.state), cellValue(row, Column.SNIPER_STATE));
+    }
+
+    Matcher<TableModelEvent> anyInsertionEvent() {
+        return hasProperty("type", equalTo(TableModelEvent.INSERT));
+    }
+
+    private Matcher<TableModelEvent> aChangeInRow(int row) {
+        return samePropertyValuesAs(new TableModelEvent(model, row));
     }
 
     private Object cellValue(int rowIndex, Column column) {
