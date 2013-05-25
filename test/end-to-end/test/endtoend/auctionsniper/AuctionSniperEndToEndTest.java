@@ -81,7 +81,7 @@ public class AuctionSniperEndToEndTest {
         auction2.announceClosed();
 
         application.showsSniperHasWonAuction(auction, 1098);
-        application.showsSniperHasWonAuction(auction2, 1098);
+        application.showsSniperHasWonAuction(auction2, 521);
     }
 
     // 追加のクリーンアップ
