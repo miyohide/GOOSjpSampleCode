@@ -45,4 +45,8 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
     public static String textFor(SniperState state) {
         return STATUS_TEXT[state.ordinal()];
     }
+
+    public void addSniper(SniperSnapshot joining) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

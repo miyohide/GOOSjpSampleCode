@@ -50,7 +50,8 @@ public class Main {
         }
     }
 
-    private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
+    private void joinAuction(XMPPConnection connection, String itemId) throws Exception {
+        safelyAddItemToModel(itemId);
         // ウィンドウをクローズしたとき、クライアントとの接続も切る
         disconnectWhenUICloses(connection);
 
@@ -88,6 +89,14 @@ public class Main {
             @Override
             public void windowClosed(WindowEvent e) {
                 connection.disconnect();
+            }
+        });
+    }
+
+    private void safelyAddItemToModel(final String itemId) throws Exception {
+        SwingUtilities.invokeAndWait(new Runnable() {
+            public void run() {
+                snipers.addSniper(SniperSnapshot.joining(itemId));
             }
         });
     }
