@@ -43,6 +43,8 @@ public class Main {
                 connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
         main.disconnectWhenUICloses(connection);
 
+        // mainの引数の0番目から2番目まではXMPPサーバに対する接続情報を格納している。
+        // 3番目以降はオークション対象のitemId
         for (int i = 3; i < args.length; i++) {
             main.joinAuction(connection, args[i]);
         }
