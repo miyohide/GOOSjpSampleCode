@@ -14,24 +14,11 @@ public class ApplicationRunner {
     private AuctionSniperDriver driver;
 
     public void startBinddingIn(final FakeAuctionServer... auctions) {
-        Thread thread = new Thread("Test Application") {
-            @Override
-            public void run() {
-                try {
-                    Main.main(arguments(auctions));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.setDaemon(true);
-        thread.start();
-        driver = new AuctionSniperDriver(1000);
-        driver.hasTitle(MainWindow.APPLICATION_TITLE);
-        driver.hasColumnTitles();
+        startSniper();
         for (FakeAuctionServer auction : auctions) {
-            driver.showsSniperStatus(auction.getItemId(), 0, 0,
-                    SnipersTableModel.textFor(SniperState.JOINING));
+            final String itemId = auction.getItemId();
+            driver.startBiddingFor(itemId);
+            driver.showsSniperStatus(itemId, 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
         }
     }
 
@@ -78,5 +65,23 @@ public class ApplicationRunner {
 
     public void showsSniperHasWonAuction(FakeAuctionServer auction, int lastPrice) {
         driver.showsSniperStatus(auction.getItemId(), lastPrice, lastPrice, SnipersTableModel.STATUS_WON);
+    }
+
+    private void startSniper() {
+        Thread thread = new Thread("Test Application") {
+            @Override
+            public void run() {
+                try {
+                    Main.main(XMPP_HOSTNAME, SNIPER_ID, SNIPER_PASSWORD);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.setDaemon(true);
+        thread.start();
+        driver = new AuctionSniperDriver(1000);
+        driver.hasTitle(MainWindow.APPLICATION_TITLE);
+        driver.hasColumnTitles();
     }
 }
