@@ -1,6 +1,7 @@
 package jp.goos.sample.ui;
 
 import actionsniper.SniperSnapshot;
+import actionsniper.UserRequestListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -72,4 +73,8 @@ public class MainWindow extends JFrame {
 //    public void sniperStatusChanged(SniperSnapshot sniperSnapshot) {
 //        snipers.sniperStateChanged(sniperSnapshot);
 //    }
+
+    public void addUserRequestListener(UserRequestListener userRequestListener) {
+        // P194 とりあえずの仮実装で空としている。
+    }
 }
