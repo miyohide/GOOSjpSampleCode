@@ -1,11 +1,13 @@
 package jp.goos.sample.ui;
 
-import actionsniper.SniperSnapshot;
 import actionsniper.UserRequestListener;
+import actionsniper.util.Announcer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +25,8 @@ public class MainWindow extends JFrame {
     public static final String APPLICATION_TITLE = "Auction Sniper";
     public static final String NEW_ITEM_ID_NAME = "item id";
     public static final String JOIN_BUTTON_NAME = "join button";
+    private final Announcer<UserRequestListener> userRequests =
+            Announcer.to(UserRequestListener.class);
 
     public MainWindow(SnipersTableModel sniper) {
         super(APPLICATION_TITLE);
@@ -65,6 +69,12 @@ public class MainWindow extends JFrame {
         // 「Join Auction」ボタン
         JButton joinAuctionButton = new JButton("Join Auction");
         joinAuctionButton.setName(JOIN_BUTTON_NAME);
+
+        joinAuctionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                userRequests.announce().joinAuction(itemIdField.getText());
+            }
+        });
         controls.add(joinAuctionButton);
 
         return controls;
@@ -73,8 +83,7 @@ public class MainWindow extends JFrame {
 //    public void sniperStatusChanged(SniperSnapshot sniperSnapshot) {
 //        snipers.sniperStateChanged(sniperSnapshot);
 //    }
-
     public void addUserRequestListener(UserRequestListener userRequestListener) {
-        // P194 とりあえずの仮実装で空としている。
+        userRequests.addListener(userRequestListener);
     }
 }
