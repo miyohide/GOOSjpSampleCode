@@ -16,7 +16,7 @@ import org.jivesoftware.smack.XMPPException;
 public class Main {
 
     @SuppressWarnings("unused")
-    private List<Chat> notToBeGCd = new ArrayList<>();
+    private List<Auction> notToBeGCd = new ArrayList<>();
     private static final int ARG_HOSTNAME = 0;
     private static final int ARG_USERNAME = 1;
     private static final int ARG_PASSWORD = 2;
@@ -76,23 +76,13 @@ public class Main {
     }
 
     private void addUserRequestListenerFor(final XMPPConnection connection) {
-        // MainWindowのaddUserRequestListenerの呼び出し。joinAuctionの実装は、元々
-        // Mainに書いてあったjoinAucionのものをコピペ。
         ui.addUserRequestListener(new UserRequestListener() {
             @Override
             public void joinAuction(String itemId) {
                 snipers.addSniper(SniperSnapshot.joining(itemId));
-                Chat chat =
-                        connection.getChatManager().createChat(auctionId(itemId, connection), null);
-                Announcer<AuctionEventListener> auctionEventListeners =
-                        Announcer.to(AuctionEventListener.class);
-                chat.addMessageListener(
-                        new AuctionMessageTranslator(connection.getUser(),
-                        auctionEventListeners.announce()));
-                notToBeGCd.add(chat);
-
-                Auction auction = new XMPPAuction(chat);
-                auctionEventListeners.addListener(
+                Auction auction = new XMPPAuction(connection, itemId);
+                notToBeGCd.add(auction);
+                auction.addAuctionEventListener(
                         new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers)));
                 auction.join();
             }
