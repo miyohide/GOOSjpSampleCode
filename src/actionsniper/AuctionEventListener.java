@@ -1,6 +1,9 @@
 package actionsniper;
 
-public interface AuctionEventListener {
+import java.util.EventListener;
+
+// P201 Mainクラスの変更に対応するためにEventListenerをextendsした
+public interface AuctionEventListener extends EventListener{
     enum PriceSource {
         FromSniper,      // スナイパーから入札
         FromOtherBidder; // 他の人から入札
