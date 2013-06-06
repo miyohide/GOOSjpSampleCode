@@ -4,5 +4,5 @@ public interface Auction {
     void bid(int amount);
     public void join();
 
-    public void addAuctionEventListener(AuctionSniper auctionSniper);
+    public void addAuctionEventListener(AuctionEventListener auctionEventListener);
 }
