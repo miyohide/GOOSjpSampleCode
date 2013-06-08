@@ -1,4 +1,4 @@
-package actionsniper.util;
+package auctionsniper.util;
 
 public class Defect extends RuntimeException {
 

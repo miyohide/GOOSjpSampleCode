@@ -1,6 +1,6 @@
 package auctionsniper;
 
-import actionsniper.util.Announcer;
+import auctionsniper.util.Announcer;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;

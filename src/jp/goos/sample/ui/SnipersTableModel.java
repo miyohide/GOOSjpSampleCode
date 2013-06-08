@@ -3,7 +3,7 @@ package jp.goos.sample.ui;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
-import actionsniper.util.Defect;
+import auctionsniper.util.Defect;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
