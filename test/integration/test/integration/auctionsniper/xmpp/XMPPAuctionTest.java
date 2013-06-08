@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionEventListener.PriceSource;
-import auctionsniper.XMPPAuction;
+import auctionsniper.xmpp.XMPPAuction;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.jivesoftware.smack.XMPPConnection;

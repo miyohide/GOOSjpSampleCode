@@ -1,5 +1,6 @@
 package auctionsniper;
 
+import auctionsniper.xmpp.XMPPAuction;
 import auctionsniper.util.Announcer;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
