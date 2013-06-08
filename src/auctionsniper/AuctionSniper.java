@@ -1,4 +1,4 @@
-package actionsniper;
+package auctionsniper;
 
 public class AuctionSniper implements AuctionEventListener {
     private final SniperListener sniperListener;

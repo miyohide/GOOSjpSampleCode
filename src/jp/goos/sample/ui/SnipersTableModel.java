@@ -1,8 +1,8 @@
 package jp.goos.sample.ui;
 
-import actionsniper.SniperListener;
-import actionsniper.SniperSnapshot;
-import actionsniper.SniperState;
+import auctionsniper.SniperListener;
+import auctionsniper.SniperSnapshot;
+import auctionsniper.SniperState;
 import actionsniper.util.Defect;
 import java.util.ArrayList;
 import java.util.List;

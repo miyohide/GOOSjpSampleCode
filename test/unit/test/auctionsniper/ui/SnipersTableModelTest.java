@@ -1,7 +1,7 @@
 package test.auctionsniper.ui;
 
-import actionsniper.SniperSnapshot;
-import actionsniper.SniperState;
+import auctionsniper.SniperSnapshot;
+import auctionsniper.SniperState;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertEquals;

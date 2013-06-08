@@ -2,10 +2,10 @@ package test.integration.auctionsniper.xmpp;
 
 import static org.junit.Assert.assertTrue;
 
-import actionsniper.Auction;
-import actionsniper.AuctionEventListener;
-import actionsniper.AuctionEventListener.PriceSource;
-import actionsniper.XMPPAuction;
+import auctionsniper.Auction;
+import auctionsniper.AuctionEventListener;
+import auctionsniper.AuctionEventListener.PriceSource;
+import auctionsniper.XMPPAuction;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.jivesoftware.smack.XMPPConnection;

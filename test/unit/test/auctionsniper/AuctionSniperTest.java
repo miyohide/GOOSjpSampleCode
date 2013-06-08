@@ -1,12 +1,12 @@
 package test.auctionsniper;
 
 import static org.hamcrest.Matchers.equalTo;
-import actionsniper.Auction;
-import actionsniper.AuctionEventListener.PriceSource;
-import actionsniper.AuctionSniper;
-import actionsniper.SniperListener;
-import actionsniper.SniperSnapshot;
-import actionsniper.SniperState;
+import auctionsniper.Auction;
+import auctionsniper.AuctionEventListener.PriceSource;
+import auctionsniper.AuctionSniper;
+import auctionsniper.SniperListener;
+import auctionsniper.SniperSnapshot;
+import auctionsniper.SniperState;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 import org.jmock.Expectations;

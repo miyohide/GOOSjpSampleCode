@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.hasProperty;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
-import actionsniper.Main;
+import auctionsniper.Main;
 import org.hamcrest.Matcher;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;

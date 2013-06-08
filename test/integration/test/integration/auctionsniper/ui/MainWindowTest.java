@@ -1,6 +1,6 @@
 package test.integration.auctionsniper.ui;
 
-import actionsniper.UserRequestListener;
+import auctionsniper.UserRequestListener;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.objogate.wl.swing.probe.ValueMatcherProbe;

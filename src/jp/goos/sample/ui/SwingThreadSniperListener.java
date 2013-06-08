@@ -1,7 +1,7 @@
 package jp.goos.sample.ui;
 
-import actionsniper.SniperListener;
-import actionsniper.SniperSnapshot;
+import auctionsniper.SniperListener;
+import auctionsniper.SniperSnapshot;
 import javax.swing.SwingUtilities;
 
 public class SwingThreadSniperListener implements SniperListener {

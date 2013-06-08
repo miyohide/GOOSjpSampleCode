@@ -2,7 +2,7 @@ package jp.goos.sample.ui;
 
 // テーブル内のカラムを表現する
 
-import actionsniper.SniperSnapshot;
+import auctionsniper.SniperSnapshot;
 
 public enum Column {
     ITEM_IDENTIFIER("Item") {

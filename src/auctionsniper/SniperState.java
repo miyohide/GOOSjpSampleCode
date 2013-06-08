@@ -1,4 +1,4 @@
-package actionsniper;
+package auctionsniper;
 
 import actionsniper.util.Defect;
 

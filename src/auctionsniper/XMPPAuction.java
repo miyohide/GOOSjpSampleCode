@@ -1,4 +1,4 @@
-package actionsniper;
+package auctionsniper;
 
 import actionsniper.util.Announcer;
 import org.jivesoftware.smack.Chat;

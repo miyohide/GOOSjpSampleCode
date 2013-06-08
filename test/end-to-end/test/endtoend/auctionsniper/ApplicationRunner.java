@@ -1,7 +1,7 @@
 package test.endtoend.auctionsniper;
 
-import actionsniper.Main;
-import actionsniper.SniperState;
+import auctionsniper.Main;
+import auctionsniper.SniperState;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 import jp.goos.sample.ui.MainWindow;
 import jp.goos.sample.ui.SnipersTableModel;

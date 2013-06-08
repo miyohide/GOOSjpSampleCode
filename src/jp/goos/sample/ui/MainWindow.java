@@ -1,6 +1,6 @@
 package jp.goos.sample.ui;
 
-import actionsniper.UserRequestListener;
+import auctionsniper.UserRequestListener;
 import actionsniper.util.Announcer;
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -1,6 +1,6 @@
-package actionsniper;
+package auctionsniper;
 
-import actionsniper.AuctionEventListener.PriceSource;
+import auctionsniper.AuctionEventListener.PriceSource;
 import java.util.HashMap;
 import java.util.Map;
 import org.jivesoftware.smack.Chat;

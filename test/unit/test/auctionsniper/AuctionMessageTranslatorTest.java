@@ -1,8 +1,8 @@
 package test.auctionsniper;
 
-import actionsniper.AuctionEventListener;
-import actionsniper.AuctionEventListener.PriceSource;
-import actionsniper.AuctionMessageTranslator;
+import auctionsniper.AuctionEventListener;
+import auctionsniper.AuctionEventListener.PriceSource;
+import auctionsniper.AuctionMessageTranslator;
 import test.endtoend.auctionsniper.ApplicationRunner;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
