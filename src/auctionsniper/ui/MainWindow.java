@@ -1,4 +1,4 @@
-package jp.goos.sample.ui;
+package auctionsniper.ui;
 
 import auctionsniper.UserRequestListener;
 import auctionsniper.util.Announcer;

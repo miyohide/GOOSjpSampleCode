@@ -1,4 +1,4 @@
-package jp.goos.sample.ui;
+package auctionsniper.ui;
 
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;

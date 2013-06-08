@@ -9,10 +9,10 @@ import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.hamcrest.Matchers.hasProperty;
 
 import org.hamcrest.Matcher;
-import jp.goos.sample.ui.SnipersTableModel;
+import auctionsniper.ui.SnipersTableModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import jp.goos.sample.ui.Column;
+import auctionsniper.ui.Column;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;

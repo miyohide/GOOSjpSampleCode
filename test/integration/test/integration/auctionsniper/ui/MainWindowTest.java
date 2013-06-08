@@ -4,8 +4,8 @@ import auctionsniper.UserRequestListener;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.objogate.wl.swing.probe.ValueMatcherProbe;
-import jp.goos.sample.ui.MainWindow;
-import jp.goos.sample.ui.SnipersTableModel;
+import auctionsniper.ui.MainWindow;
+import auctionsniper.ui.SnipersTableModel;
 import org.junit.Test;
 import test.endtoend.auctionsniper.AuctionSniperDriver;
 

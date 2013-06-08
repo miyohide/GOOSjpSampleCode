@@ -1,4 +1,4 @@
-package jp.goos.sample.ui;
+package auctionsniper.ui;
 
 // テーブル内のカラムを表現する
 

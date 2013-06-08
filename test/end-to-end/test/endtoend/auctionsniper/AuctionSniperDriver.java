@@ -14,7 +14,7 @@ import com.objogate.wl.swing.gesture.GesturePerformer;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
-import jp.goos.sample.ui.MainWindow;
+import auctionsniper.ui.MainWindow;
 
 public class AuctionSniperDriver extends JFrameDriver {
 
