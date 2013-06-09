@@ -9,6 +9,10 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
 public class XMPPAuction implements Auction {
+    public static final String JOIN_COMMAND_FORMAT = "SOLVersion: 1.1; Command: JOIN;";
+    public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
+    public static final String ITEM_ID_AS_LOGIN = "auction-%s";
+    public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%s/" + XMPPAuctionHouse.AUCTION_RESOURCE;
     private final Announcer<AuctionEventListener> auctionEventListeners =
             Announcer.to(AuctionEventListener.class);
     private final Chat chat;
@@ -24,11 +28,11 @@ public class XMPPAuction implements Auction {
     }
 
     public void bid(int amount) {
-        sendMessage(String.format(Main.BID_COMMAND_FORMAT, amount));
+        sendMessage(String.format(BID_COMMAND_FORMAT, amount));
     }
     
     public void join() {
-        sendMessage(String.format(Main.JOIN_COMMAND_FORMAT));
+        sendMessage(String.format(JOIN_COMMAND_FORMAT));
     }
     
     private void sendMessage(final String message) {
@@ -40,7 +44,7 @@ public class XMPPAuction implements Auction {
     }
 
     private static String auctionId(String itemId, XMPPConnection connection) {
-        return String.format(Main.AUCTION_ID_FORMAT, itemId, connection.getServiceName());
+        return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
     }
 
     @Override

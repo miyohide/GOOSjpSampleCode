@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.hasProperty;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import auctionsniper.Main;
+import auctionsniper.xmpp.XMPPAuction;
 import org.hamcrest.Matcher;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;
@@ -55,13 +56,13 @@ public class FakeAuctionServer {
     // スナイパーから「参加」リクエストを受信したか
     public void hasReceivedJoinRequestFrom(String sniperId) throws InterruptedException {
         receivesAMessageMatching(sniperId,
-                equalTo(Main.JOIN_COMMAND_FORMAT));
+                equalTo(XMPPAuction.JOIN_COMMAND_FORMAT));
     }
     
     // 「入札」を受信したか
     public void hasReceivedBid(int bid, String sniperId) throws InterruptedException {
         receivesAMessageMatching(sniperId,
-                equalTo(String.format(Main.BID_COMMAND_FORMAT, bid)));
+                equalTo(String.format(XMPPAuction.BID_COMMAND_FORMAT, bid)));
     }
     
     private void receivesAMessageMatching(String sniperId, Matcher<? super String> messageMatcher)
