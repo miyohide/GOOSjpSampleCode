@@ -1,13 +1,22 @@
 package auctionsniper;
 
+import auctionsniper.ui.SwingThreadSniperListener;
+
 public class AuctionSniper implements AuctionEventListener {
-    private final SniperListener sniperListener;
+    private SniperListener sniperListener;
     private final Auction auction;
     private String itemId = null;
     private SniperSnapshot snapshot;
     
     public AuctionSniper(String itemId, Auction auction, SniperListener sniperListener) {
         this.sniperListener = sniperListener;
+        this.auction = auction;
+        this.itemId = itemId;
+        this.snapshot = SniperSnapshot.joining(itemId);
+    }
+
+    public AuctionSniper(String itemId, Auction auction) {
+        // P206 sniperListenerの初期化をaddSniperListenerメソッドとして分離している
         this.auction = auction;
         this.itemId = itemId;
         this.snapshot = SniperSnapshot.joining(itemId);
@@ -38,4 +47,11 @@ public class AuctionSniper implements AuctionEventListener {
         sniperListener.sniperStateChanged(snapshot);
     }
 
+    public SniperSnapshot getSnapshot() {
+        return snapshot;
+    }
+
+    public void addSniperListener(SniperListener listener) {
+        this.sniperListener = listener;
+    }
 }
