@@ -1,6 +1,7 @@
 package auctionsniper.ui;
 
 import auctionsniper.AuctionSniper;
+import auctionsniper.PortfolioListener;
 import auctionsniper.SniperCollector;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class SnipersTableModel extends AbstractTableModel implements SniperListener, SniperCollector {
+public class SnipersTableModel extends AbstractTableModel implements SniperListener, SniperCollector, PortfolioListener {
     public static final String STATUS_WON = "Won";
     public static final String STATUS_JOINING = "Joining";
     public static final String STATUS_LOST = "Lost";
@@ -78,5 +79,10 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
             }
         }
         throw new Defect("Cannot find match for " + newSnapshot);
+    }
+
+    @Override
+    public void sniperAdded(AuctionSniper sniper) {
+        addSniper(sniper);
     }
 }

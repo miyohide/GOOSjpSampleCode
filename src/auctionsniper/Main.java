@@ -16,11 +16,12 @@ public class Main {
     private static final int ARG_ITEM_ID = 3;
     private final SnipersTableModel snipers = new SnipersTableModel();
     private MainWindow ui;
+    private final SniperPortfolio portfolio = new SniperPortfolio();
 
     public Main() throws Exception {
         SwingUtilities.invokeAndWait(new Runnable() {
             public void run() {
-                ui = new MainWindow(snipers);
+                ui = new MainWindow(portfolio);
             }
         });
     }
@@ -43,6 +44,6 @@ public class Main {
     }
 
     private void addUserRequestListenerFor(final AuctionHouse auctionHouse) {
-        ui.addUserRequestListener(new SniperLauncher(auctionHouse, snipers));
+        ui.addUserRequestListener(new SniperLauncher(auctionHouse, portfolio));
     }
 }

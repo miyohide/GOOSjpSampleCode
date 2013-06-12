@@ -1,18 +1,18 @@
 package test.integration.auctionsniper.ui;
 
+import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.objogate.wl.swing.probe.ValueMatcherProbe;
 import auctionsniper.ui.MainWindow;
-import auctionsniper.ui.SnipersTableModel;
 import org.junit.Test;
 import test.endtoend.auctionsniper.AuctionSniperDriver;
 
 public class MainWindowTest {
 
-    private final SnipersTableModel tableModel = new SnipersTableModel();
-    private final MainWindow mainWindow = new MainWindow(tableModel);
+    private final SniperPortfolio portfolio = new SniperPortfolio();
+    private final MainWindow mainWindow = new MainWindow(portfolio);
     private final AuctionSniperDriver driver = new AuctionSniperDriver(100);
     
     @Test
