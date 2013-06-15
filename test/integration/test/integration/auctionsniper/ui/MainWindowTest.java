@@ -1,5 +1,6 @@
 package test.integration.auctionsniper.ui;
 
+import auctionsniper.Item;
 import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
 import static org.hamcrest.Matchers.equalTo;
@@ -20,10 +21,9 @@ public class MainWindowTest {
         final ValueMatcherProbe<String> buttonProbe =
                 new ValueMatcherProbe<>(equalTo("an item-id"), "join request");
         
-        mainWindow.addUserRequestListener(
-                new UserRequestListener() {
-            public void joinAuction(String itemId) {
-                buttonProbe.setReceivedValue(itemId);
+        mainWindow.addUserRequestListener(new UserRequestListener() {
+            public void joinAuction(Item item) {
+                buttonProbe.setReceivedValue(item.identifier);
             }
         });
         

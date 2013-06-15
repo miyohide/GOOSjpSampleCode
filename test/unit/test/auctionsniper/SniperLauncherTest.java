@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.equalTo;
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
 import auctionsniper.AuctionSniper;
+import auctionsniper.Item;
 import auctionsniper.SniperCollector;
 import auctionsniper.SniperLauncher;
 import org.hamcrest.FeatureMatcher;
@@ -34,8 +35,8 @@ public class SniperLauncherTest {
                 
             one(auction).join(); then(auctionState.is("joined"));
         }});
-        
-        launcher.joinAuction(itemId);
+        // 9999は適当な値
+        launcher.joinAuction(new Item(itemId, 9999));
     }
 
     protected Matcher<AuctionSniper> sniperForItem(String itemId) {
