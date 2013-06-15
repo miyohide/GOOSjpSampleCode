@@ -22,6 +22,13 @@ public class ApplicationRunner {
         }
     }
 
+    public void startBiddingWithStopPrice(FakeAuctionServer auction, int stopPrice) {
+        startSniper();
+        final String itemId = auction.getItemId();
+        driver.startBiddingFor(itemId, stopPrice);
+        driver.showsSniperStatus(itemId, 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
+    }
+
     protected static String[] arguments(FakeAuctionServer... auctions) {
         String[] arguments = new String[auctions.length + 3];
         arguments[0] = XMPP_HOSTNAME;
@@ -65,6 +72,15 @@ public class ApplicationRunner {
 
     public void showsSniperHasWonAuction(FakeAuctionServer auction, int lastPrice) {
         driver.showsSniperStatus(auction.getItemId(), lastPrice, lastPrice, SnipersTableModel.STATUS_WON);
+    }
+
+    public void hasShownSniperIsLosing(FakeAuctionServer auction, int lastPrice, int lastBidPrice) {
+        driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBidPrice, SnipersTableModel.STATUS_LOSING);
+        
+    }
+
+    public void showsSniperHasLostAuction(FakeAuctionServer auction, int lastPrice, int lastBidPrice) {
+        driver.showsSniperStatus(SnipersTableModel.STATUS_LOST);
     }
 
     private void startSniper() {
