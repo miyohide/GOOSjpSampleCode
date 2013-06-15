@@ -89,6 +89,8 @@ public class AuctionSniperEndToEndTest {
     public void sniperLosesAnAuctionWhenThePriceIsTooHigh() throws Exception {
         auction.startSellingItem();
         application.startBiddingWithStopPrice(auction, 1100);
+        auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID);
+
         auction.reportPrice(1000, 98, "other bidder");
         
         auction.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);
