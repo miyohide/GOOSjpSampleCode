@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -69,6 +70,11 @@ public class MainWindow extends JFrame {
         itemIdField.setColumns(25);
         itemIdField.setName(NEW_ITEM_ID_NAME);
         controls.add(itemIdField);
+        // 逆指値のためのテキストフィールド
+        final JFormattedTextField stopPriceField = new JFormattedTextField();
+        stopPriceField.setColumns(10);
+        stopPriceField.setName(NEW_ITEM_STOP_PRICE_NAME);
+        controls.add(stopPriceField);
 
         // 「Join Auction」ボタン
         JButton joinAuctionButton = new JButton("Join Auction");
