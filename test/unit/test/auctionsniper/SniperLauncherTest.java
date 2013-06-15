@@ -35,8 +35,7 @@ public class SniperLauncherTest {
                 
             one(auction).join(); then(auctionState.is("joined"));
         }});
-        // 9999は適当な値
-        launcher.joinAuction(new Item(itemId, 9999));
+        launcher.joinAuction(new Item(itemId, Integer.MAX_VALUE));
     }
 
     protected Matcher<AuctionSniper> sniperForItem(String itemId) {

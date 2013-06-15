@@ -92,7 +92,7 @@ public class MainWindow extends JFrame {
             private int stopPrice() {
                 String stopPriceString = stopPriceField.getText();
                 if (stopPriceString.equals("")) {
-                    return 0;
+                    return Integer.MAX_VALUE;
                 } else {
                     return Integer.valueOf(stopPriceString);
                 }
