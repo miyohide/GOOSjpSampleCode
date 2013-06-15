@@ -5,21 +5,13 @@ import auctionsniper.ui.SwingThreadSniperListener;
 public class AuctionSniper implements AuctionEventListener {
     private SniperListener sniperListener;
     private final Auction auction;
-    private String itemId = null;
     private SniperSnapshot snapshot;
-    
-    public AuctionSniper(String itemId, Auction auction, SniperListener sniperListener) {
-        this.sniperListener = sniperListener;
-        this.auction = auction;
-        this.itemId = itemId;
-        this.snapshot = SniperSnapshot.joining(itemId);
-    }
+    private Item item = null;
 
-    public AuctionSniper(String itemId, Auction auction) {
-        // P206 sniperListenerの初期化をaddSniperListenerメソッドとして分離している
+    public AuctionSniper(Item item, Auction auction) {
         this.auction = auction;
-        this.itemId = itemId;
-        this.snapshot = SniperSnapshot.joining(itemId);
+        this.item = item;
+        this.snapshot = SniperSnapshot.joining(item.identifier);
     }
 
     @Override
@@ -36,8 +28,12 @@ public class AuctionSniper implements AuctionEventListener {
                 break;
             case FromOtherBidder:
                 final int bid = price + increment;
-                auction.bid(bid);
-                snapshot = snapshot.bidding(price, bid);
+                if (item.allowsBid(bid)) {
+                    auction.bid(bid);
+                    snapshot = snapshot.bidding(price, bid);
+                } else {
+                    snapshot = snapshot.losing(price);
+                }
                 break;
         }
         notifyChange();
