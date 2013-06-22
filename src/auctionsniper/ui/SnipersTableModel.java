@@ -18,9 +18,10 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
     public static final String STATUS_LOSING = "Losing";
     public static final String STATUS_BIDDING = "Bidding";
     public static final String STATUS_WINNING = "Winning";
+    public static final String STATUS_FAILED = "Failed";
 
     private static String[] STATUS_TEXT = {
-        STATUS_JOINING, STATUS_BIDDING, STATUS_WINNING, STATUS_LOSING, STATUS_LOST, STATUS_WON};
+        STATUS_JOINING, STATUS_BIDDING, STATUS_WINNING, STATUS_LOSING, STATUS_LOST, STATUS_WON, STATUS_FAILED};
     private List<SniperSnapshot> snapshots = new ArrayList<>();
     private final List<AuctionSniper> notToBeGCd = new ArrayList<>();
     
