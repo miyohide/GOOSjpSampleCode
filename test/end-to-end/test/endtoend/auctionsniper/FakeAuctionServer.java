@@ -82,6 +82,10 @@ public class FakeAuctionServer {
     public String getItemId() {
         return itemId;
     }
+
+    void sendInvalidMessageContaining(String brokenMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public class SingleMessageListener implements MessageListener {
         private final ArrayBlockingQueue<Message> messages =
