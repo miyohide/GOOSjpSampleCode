@@ -83,8 +83,8 @@ public class FakeAuctionServer {
         return itemId;
     }
 
-    void sendInvalidMessageContaining(String brokenMessage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void sendInvalidMessageContaining(String brokenMessage) throws XMPPException {
+        currentChat.sendMessage(brokenMessage);
     }
     
     public class SingleMessageListener implements MessageListener {

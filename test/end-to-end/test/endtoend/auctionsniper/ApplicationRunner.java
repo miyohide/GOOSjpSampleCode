@@ -83,6 +83,10 @@ public class ApplicationRunner {
         driver.showsSniperStatus(SnipersTableModel.STATUS_LOST);
     }
 
+    public void showsSniperHasFailed(FakeAuctionServer auction) {
+        driver.showsSniperStatus(auction.getItemId(), 0, 0, SnipersTableModel.STATUS_FAILED);
+    }
+
     private void startSniper() {
         Thread thread = new Thread("Test Application") {
             @Override
@@ -101,11 +105,7 @@ public class ApplicationRunner {
         driver.hasColumnTitles();
     }
 
-    void showsSniperHasFailed(FakeAuctionServer auction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     void reportsInvalidMessage(FakeAuctionServer auction, String brokenMessage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // TODO あとで実装する
     }
 }
