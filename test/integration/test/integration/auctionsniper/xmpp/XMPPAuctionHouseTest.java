@@ -37,6 +37,9 @@ public class XMPPAuctionHouseTest {
             public void currentPrice(int price, int increment, PriceSource priceSource) {
                 // 未実装
             }
+            @Override
+            public void auctionFailed() {
+            }
         };
     }
 }

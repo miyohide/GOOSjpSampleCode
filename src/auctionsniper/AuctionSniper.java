@@ -50,4 +50,8 @@ public class AuctionSniper implements AuctionEventListener {
     public void addSniperListener(SniperListener listener) {
         this.sniperListener = listener;
     }
+
+    @Override
+    public void auctionFailed() {
+    }
 }
