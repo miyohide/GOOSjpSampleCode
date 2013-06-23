@@ -111,6 +111,17 @@ public class AuctionSniperTest {
         sniper.currentPrice(2345, 25, PriceSource.FromOtherBidder);
     }
 
+    @Test
+    public void reportsFailedIfAuctionFailsWhenBidding() {
+        ignoringAuction();
+        allowingSniperBidding();
+
+        expectSniperToFailWhenItIs("bidding");
+
+        sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
+        sniper.auctionFailed();
+    }
+
     private Matcher<SniperSnapshot> aSniperThatIs(final SniperState state) {
         return new FeatureMatcher<SniperSnapshot, SniperState>(
                 equalTo(state), "sniper that is ", "was") {
@@ -125,6 +136,20 @@ public class AuctionSniperTest {
         context.checking(new Expectations() {{
             allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.BIDDING)));
               then(sniperState.is("bidding"));
+        }});
+    }
+
+    private void expectSniperToFailWhenItIs(final String state) {
+        context.checking(new Expectations() {{
+            atLeast(1).of(sniperListener).sniperStateChanged(
+                    new SniperSnapshot(ITEM_ID, 00, 0, SniperState.FAILED));
+            when(sniperState.is(state));
+        }});
+    }
+
+    private void ignoringAuction() {
+        context.checking(new Expectations() {{
+            ignoring(auction);
         }});
     }
 }
