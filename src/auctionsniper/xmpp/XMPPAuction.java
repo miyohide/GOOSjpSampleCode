@@ -23,7 +23,7 @@ public class XMPPAuction implements Auction {
 
     public XMPPAuction(XMPPConnection connection, String itemId) {
         AuctionMessageTranslator translator = translatorFor(connection);
-        this.chat = connection.getChatManager().createChat(itemId, translator);
+        this.chat = connection.getChatManager().createChat(auctionId(itemId, connection), translator);
         addAuctionEventListener(chatDisconnectorFor(translator));
     }
 
