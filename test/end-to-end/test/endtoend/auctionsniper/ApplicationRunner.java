@@ -5,6 +5,8 @@ import auctionsniper.SniperState;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
+import java.io.IOException;
+import static org.hamcrest.CoreMatchers.containsString;
 
 public class ApplicationRunner {
 
@@ -12,6 +14,7 @@ public class ApplicationRunner {
     public static final String SNIPER_PASSWORD = "sniper";
     public static final String SNIPER_XMPP_ID = SNIPER_ID + "@" + XMPP_HOSTNAME + "/Auction";
     private AuctionSniperDriver driver;
+    private AuctionLogDriver logDriver = new AuctionLogDriver();
 
     public void startBinddingIn(final FakeAuctionServer... auctions) {
         startSniper();
@@ -88,6 +91,7 @@ public class ApplicationRunner {
     }
 
     private void startSniper() {
+        logDriver.clearLog();
         Thread thread = new Thread("Test Application") {
             @Override
             public void run() {
@@ -105,7 +109,7 @@ public class ApplicationRunner {
         driver.hasColumnTitles();
     }
 
-    void reportsInvalidMessage(FakeAuctionServer auction, String brokenMessage) {
-        // TODO あとで実装する
+    public void reportsInvalidMessage(FakeAuctionServer auction, String brokenMessage) throws IOException {
+        logDriver.hasEntry(containsString(brokenMessage));
     }
 }
