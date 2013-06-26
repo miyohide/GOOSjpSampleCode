@@ -19,10 +19,10 @@ public class AuctionMessageTranslatorTest {
     public static final Chat UNUSED_CHAT = null;
     private final Mockery context = new Mockery();
     private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
-    private final AuctionMessageTranslator translator =
-            new AuctionMessageTranslator(ApplicationRunner.SNIPER_ID, listener);
     private final XMPPFailureReporter failureReporter =
             context.mock(XMPPFailureReporter.class);
+    private final AuctionMessageTranslator translator =
+            new AuctionMessageTranslator(ApplicationRunner.SNIPER_ID, listener, failureReporter);
 
     @Test
     public void notifiesAuctionClosedWhenCloseMessagereceived() {
@@ -77,17 +77,11 @@ public class AuctionMessageTranslatorTest {
 
     @Test
     public void notifiesAuctionFailedWhenEventTypeMissing() {
-        context.checking(new Expectations() {
-            {
-                exactly(1).of(listener).auctionFailed();
-            }
-        });
-
-        Message message = new Message();
         // Event: が存在しないメッセージ
-        message.setBody("SOLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: "
-                + ApplicationRunner.SNIPER_ID + ";");
-        translator.processMessage(UNUSED_CHAT, message);
+        String badMessage = "SOLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: "
+                + ApplicationRunner.SNIPER_ID + ";";
+        expectFailureWithMessage(badMessage);
+        translator.processMessage(UNUSED_CHAT, message(badMessage));
     }
 
     private Message message(String body) {
