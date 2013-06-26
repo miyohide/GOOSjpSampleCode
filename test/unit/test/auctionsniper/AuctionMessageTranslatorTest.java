@@ -3,6 +3,7 @@ package test.auctionsniper;
 import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.xmpp.AuctionMessageTranslator;
+import auctionsniper.xmpp.XMPPFailureReporter;
 import test.endtoend.auctionsniper.ApplicationRunner;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
@@ -20,6 +21,8 @@ public class AuctionMessageTranslatorTest {
     private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
     private final AuctionMessageTranslator translator =
             new AuctionMessageTranslator(ApplicationRunner.SNIPER_ID, listener);
+    private final XMPPFailureReporter failureReporter =
+            context.mock(XMPPFailureReporter.class);
 
     @Test
     public void notifiesAuctionClosedWhenCloseMessagereceived() {
@@ -67,15 +70,9 @@ public class AuctionMessageTranslatorTest {
 
     @Test
     public void notifiesAuctionFailedWhenBadMessageReceived() {
-        context.checking(new Expectations() {
-            {
-                exactly(1).of(listener).auctionFailed();
-            }
-        });
-
-        Message message = new Message();
-        message.setBody("a bad message");
-        translator.processMessage(UNUSED_CHAT, message);
+        String badMessage = "a bad message";
+        expectFailureWithMessage(badMessage);
+        translator.processMessage(UNUSED_CHAT, message(badMessage));
     }
 
     @Test
@@ -91,5 +88,21 @@ public class AuctionMessageTranslatorTest {
         message.setBody("SOLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: "
                 + ApplicationRunner.SNIPER_ID + ";");
         translator.processMessage(UNUSED_CHAT, message);
+    }
+
+    private Message message(String body) {
+        Message message = new Message();
+        message.setBody(body);
+        return message;
+    }
+
+    private void expectFailureWithMessage(final String badMessage) {
+        context.checking(new Expectations() {{
+            oneOf(listener).auctionFailed();
+            oneOf(failureReporter).cannotTranslateMessage(
+                    with(ApplicationRunner.SNIPER_ID), 
+                    with(badMessage), 
+                    with(any(Exception.class)));
+        }});
     }
 }
