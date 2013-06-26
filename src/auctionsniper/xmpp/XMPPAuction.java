@@ -48,7 +48,14 @@ public class XMPPAuction implements Auction {
     }
 
     private AuctionMessageTranslator translatorFor(XMPPConnection connection) {
-        return new AuctionMessageTranslator(connection.getUser(), auctionEventListeners.announce());
+        return new AuctionMessageTranslator(connection.getUser(),
+                auctionEventListeners.announce(),
+                new XMPPFailureReporter() {
+            @Override
+            public void cannotTranslateMessage(String auctionId, String failedMessage, Exception exception) {
+                // 仮実装
+            }
+        });
     }
 
     private AuctionEventListener chatDisconnectorFor(final AuctionMessageTranslator translator) {
