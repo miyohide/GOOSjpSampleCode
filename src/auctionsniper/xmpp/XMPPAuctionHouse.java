@@ -15,7 +15,7 @@ public class XMPPAuctionHouse implements AuctionHouse{
     private final XMPPConnection connection;
     private LoggingXMPPFailureReporter failureReporter;
     private String LOGGER_NAME = "auction-sniper";
-    private String LOG_FILE_NAME = "auction-sniper.log";
+    public final static String LOG_FILE_NAME = "auction-sniper.log";
     
     public XMPPAuctionHouse(XMPPConnection connection) {
         this.connection = connection;
