@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class SnipersTableModel extends AbstractTableModel implements SniperListener, SniperCollector, PortfolioListener {
+
     public static final String STATUS_WON = "Won";
     public static final String STATUS_JOINING = "Joining";
     public static final String STATUS_LOST = "Lost";
@@ -19,12 +20,11 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
     public static final String STATUS_BIDDING = "Bidding";
     public static final String STATUS_WINNING = "Winning";
     public static final String STATUS_FAILED = "Failed";
-
     private static String[] STATUS_TEXT = {
         STATUS_JOINING, STATUS_BIDDING, STATUS_WINNING, STATUS_LOSING, STATUS_LOST, STATUS_WON, STATUS_FAILED};
     private List<SniperSnapshot> snapshots = new ArrayList<>();
     private final List<AuctionSniper> notToBeGCd = new ArrayList<>();
-    
+
     @Override
     public int getColumnCount() {
         return Column.values().length;
@@ -39,12 +39,12 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
     public Object getValueAt(int rowIndex, int columnIndex) {
         return Column.at(columnIndex).valueIn(snapshots.get(rowIndex));
     }
-    
+
     @Override
     public String getColumnName(int column) {
         return Column.at(column).name;
     }
-    
+
     public void sniperStateChanged(SniperSnapshot newSnapshot) {
         int row = rowMatching(newSnapshot);
         snapshots.set(row, newSnapshot);

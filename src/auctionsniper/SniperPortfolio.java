@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SniperPortfolio implements SniperCollector, PortfolioListener {
+
     private Announcer<PortfolioListener> listeners = Announcer.to(PortfolioListener.class);
     private final List<AuctionSniper> snipers = new ArrayList<>();
 

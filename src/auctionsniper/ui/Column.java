@@ -1,10 +1,10 @@
 package auctionsniper.ui;
 
 // テーブル内のカラムを表現する
-
 import auctionsniper.SniperSnapshot;
 
 public enum Column {
+
     ITEM_IDENTIFIER("Item") {
         @Override
         public Object valueIn(SniperSnapshot snapshot) {
@@ -30,13 +30,12 @@ public enum Column {
             return SnipersTableModel.textFor(snapshot.state);
         }
     };
-    
     public final String name;
 
     private Column(String name) {
         this.name = name;
     }
-    
+
     public static Column at(int offset) {
         return values()[offset];
     }

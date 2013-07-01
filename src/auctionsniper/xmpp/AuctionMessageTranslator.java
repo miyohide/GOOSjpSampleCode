@@ -94,10 +94,10 @@ public class AuctionMessageTranslator implements MessageListener {
         static String[] fieldsIn(String messageBody) {
             return messageBody.split(";");
         }
-
     }
 
     private static class MissingValueException extends Exception {
+
         public MissingValueException(String fieldName) {
             super("Missing value for " + fieldName);
         }

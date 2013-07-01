@@ -3,6 +3,7 @@ package auctionsniper;
 import auctionsniper.util.Defect;
 
 public enum SniperState {
+
     JOINING {
         @Override
         public SniperState whenAuctionClosed() {

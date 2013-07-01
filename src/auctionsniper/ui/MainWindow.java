@@ -86,9 +86,11 @@ public class MainWindow extends JFrame {
                 Item item = new Item(itemId(), stopPrice());
                 userRequests.announce().joinAuction(item);
             }
+
             private String itemId() {
                 return itemIdField.getText();
             }
+
             private int stopPrice() {
                 String stopPriceString = stopPriceField.getText();
                 if (stopPriceString.equals("")) {

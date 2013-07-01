@@ -1,6 +1,7 @@
 package auctionsniper;
 
 public class SniperLauncher implements UserRequestListener {
+
     private final AuctionHouse auctionHouse;
     private final SniperCollector collector;
 
@@ -17,5 +18,4 @@ public class SniperLauncher implements UserRequestListener {
         collector.addSniper(sniper);
         auction.join();
     }
-    
 }

@@ -3,6 +3,7 @@ package auctionsniper;
 import auctionsniper.ui.SwingThreadSniperListener;
 
 public class AuctionSniper implements AuctionEventListener {
+
     private SniperListener sniperListener;
     private final Auction auction;
     private SniperSnapshot snapshot;
@@ -22,7 +23,7 @@ public class AuctionSniper implements AuctionEventListener {
 
     @Override
     public void currentPrice(int price, int increment, PriceSource priceSource) {
-        switch(priceSource) {
+        switch (priceSource) {
             case FromSniper:
                 snapshot = snapshot.winning(price);
                 break;
