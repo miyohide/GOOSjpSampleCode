@@ -9,8 +9,9 @@ import org.hamcrest.Matcher;
 import static org.junit.Assert.assertThat;
 
 public class AuctionLogDriver {
+
     private final File logFile = new File(XMPPAuctionHouse.LOG_FILE_NAME);
-    
+
     public void hasEntry(Matcher<String> matcher) throws IOException {
         assertThat(FileUtils.readFileToString(logFile), matcher);
     }

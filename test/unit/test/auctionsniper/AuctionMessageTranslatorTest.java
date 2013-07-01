@@ -91,12 +91,14 @@ public class AuctionMessageTranslatorTest {
     }
 
     private void expectFailureWithMessage(final String badMessage) {
-        context.checking(new Expectations() {{
-            oneOf(listener).auctionFailed();
-            oneOf(failureReporter).cannotTranslateMessage(
-                    with(ApplicationRunner.SNIPER_ID), 
-                    with(badMessage), 
-                    with(any(Exception.class)));
-        }});
+        context.checking(new Expectations() {
+            {
+                oneOf(listener).auctionFailed();
+                oneOf(failureReporter).cannotTranslateMessage(
+                        with(ApplicationRunner.SNIPER_ID),
+                        with(badMessage),
+                        with(any(Exception.class)));
+            }
+        });
     }
 }

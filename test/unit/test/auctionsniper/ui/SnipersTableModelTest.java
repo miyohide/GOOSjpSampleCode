@@ -22,26 +22,32 @@ import org.junit.runner.RunWith;
 
 @RunWith(JMock.class)
 public class SnipersTableModelTest {
+
     private final Mockery context = new Mockery();
     private TableModelListener listener = context.mock(TableModelListener.class);
     private final SnipersTableModel model = new SnipersTableModel();
 
-    @Before public void attachModelListener() {
+    @Before
+    public void attachModelListener() {
         model.addTableModelListener(listener);
     }
-    
-    @Test public void hasEnoughColumns() {
+
+    @Test
+    public void hasEnoughColumns() {
         assertThat(model.getColumnCount(), equalTo(Column.values().length));
     }
-    
-    @Test public void setsSniperValuesInColumns() {
+
+    @Test
+    public void setsSniperValuesInColumns() {
         SniperSnapshot joining = SniperSnapshot.joining("item id");
         SniperSnapshot bidding = joining.bidding(555, 666);
 
-        context.checking(new Expectations() {{
-            allowing(listener).tableChanged(with(anyInsertionEvent()));
-            one(listener).tableChanged(with(aChangeInRow(0)));
-        }});
+        context.checking(new Expectations() {
+            {
+                allowing(listener).tableChanged(with(anyInsertionEvent()));
+                one(listener).tableChanged(with(aChangeInRow(0)));
+            }
+        });
 
         model.addSniper(joining);
         model.sniperStateChanged(new SniperSnapshot("item id", 555, 666, SniperState.BIDDING));
@@ -49,18 +55,22 @@ public class SnipersTableModelTest {
         assertRowMatchesSnapshot(0, bidding);
     }
 
-    @Test public void setsUpColumnHeadings() {
-        for (Column column: Column.values()) {
+    @Test
+    public void setsUpColumnHeadings() {
+        for (Column column : Column.values()) {
             assertEquals(column.name, model.getColumnName(column.ordinal()));
         }
     }
 
-    @Test public void notifiesListenersWhenAddingASniper() {
+    @Test
+    public void notifiesListenersWhenAddingASniper() {
         SniperSnapshot joining = SniperSnapshot.joining("item123");
-        context.checking(new Expectations() {{
-            one(listener).tableChanged(with(anInsertionAtRow(0)));
-        }});
-        
+        context.checking(new Expectations() {
+            {
+                one(listener).tableChanged(with(anInsertionAtRow(0)));
+            }
+        });
+
         assertEquals(0, model.getRowCount());
         model.addSniper(joining);
         assertEquals(1, model.getRowCount());
@@ -87,7 +97,7 @@ public class SnipersTableModelTest {
         final int columnIndex = column.ordinal();
         assertEquals(expected, model.getValueAt(rowIndex, columnIndex));
     }
-    
+
     private Matcher<TableModelEvent> aRowChangedEvent() {
         return samePropertyValuesAs(new TableModelEvent(model, 0));
     }
@@ -116,5 +126,4 @@ public class SnipersTableModelTest {
     private Object cellValue(int rowIndex, Column column) {
         return model.getValueAt(rowIndex, column.ordinal());
     }
-
 }

@@ -79,7 +79,7 @@ public class ApplicationRunner {
 
     public void hasShownSniperIsLosing(FakeAuctionServer auction, int lastPrice, int lastBidPrice) {
         driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBidPrice, SnipersTableModel.STATUS_LOSING);
-        
+
     }
 
     public void showsSniperHasLostAuction(FakeAuctionServer auction, int lastPrice, int lastBidPrice) {
