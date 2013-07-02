@@ -23,7 +23,6 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
     private static String[] STATUS_TEXT = {
         STATUS_JOINING, STATUS_BIDDING, STATUS_WINNING, STATUS_LOSING, STATUS_LOST, STATUS_WON, STATUS_FAILED};
     private List<SniperSnapshot> snapshots = new ArrayList<>();
-    private final List<AuctionSniper> notToBeGCd = new ArrayList<>();
 
     @Override
     public int getColumnCount() {
@@ -45,6 +44,7 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
         return Column.at(column).name;
     }
 
+    @Override
     public void sniperStateChanged(SniperSnapshot newSnapshot) {
         int row = rowMatching(newSnapshot);
         snapshots.set(row, newSnapshot);
@@ -63,7 +63,6 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 
     @Override
     public void addSniper(AuctionSniper sniper) {
-        notToBeGCd.add(sniper);
         addSniperSnapshot(sniper.getSnapshot());
         sniper.addSniperListener(new SwingThreadSniperListener(this));
     }
