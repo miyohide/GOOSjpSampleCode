@@ -2,7 +2,6 @@ package auctionsniper.xmpp;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener;
-import auctionsniper.Main;
 import auctionsniper.util.Announcer;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
@@ -30,10 +29,12 @@ public class XMPPAuction implements Auction {
         addAuctionEventListener(chatDisconnectorFor(translator));
     }
 
+    @Override
     public void bid(int amount) {
         sendMessage(String.format(BID_COMMAND_FORMAT, amount));
     }
 
+    @Override
     public void join() {
         sendMessage(String.format(JOIN_COMMAND_FORMAT));
     }
@@ -58,6 +59,7 @@ public class XMPPAuction implements Auction {
 
     private AuctionEventListener chatDisconnectorFor(final AuctionMessageTranslator translator) {
         return new AuctionEventListener() {
+            @Override
             public void auctionFailed() {
                 chat.removeMessageListener(translator);
             }
