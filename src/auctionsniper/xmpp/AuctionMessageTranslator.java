@@ -20,6 +20,7 @@ public class AuctionMessageTranslator implements MessageListener {
         this.failureReporter = failureReporter;
     }
 
+    @Override
     public void processMessage(Chat chat, Message message) {
         String messageBody = message.getBody();
         try {
@@ -33,18 +34,20 @@ public class AuctionMessageTranslator implements MessageListener {
     private void translate(String messageBody) throws MissingValueException {
         AuctionEvent event = AuctionEvent.from(messageBody);
         String eventType = event.type();
-
-        if ("CLOSE".equals(eventType)) {
-            listener.auctionClosed();
-        } else if ("PRICE".equals(eventType)) {
-            listener.currentPrice(Integer.parseInt(event.get("CurrentPrice")),
-                    Integer.parseInt(event.get("Increment")), event.isFrom(sniperId));
+        switch (eventType) {
+            case "CLOSE":
+                listener.auctionClosed();
+                break;
+            case "PRICE":
+                listener.currentPrice(Integer.parseInt(event.get("CurrentPrice")),
+                        Integer.parseInt(event.get("Increment")), event.isFrom(sniperId));
+                break;
         }
     }
 
     public static class AuctionEvent {
 
-        private final Map<String, String> fields = new HashMap<String, String>();
+        private final Map<String, String> fields = new HashMap<>();
 
         public String type() throws MissingValueException {
             return get("Event");
