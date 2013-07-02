@@ -82,6 +82,7 @@ public class MainWindow extends JFrame {
         joinAuctionButton.setName(JOIN_BUTTON_NAME);
 
         joinAuctionButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 Item item = new Item(itemId(), stopPrice());
                 userRequests.announce().joinAuction(item);
