@@ -11,13 +11,14 @@ import java.util.List;
 public class Announcer<T extends EventListener> {
 
     private final T proxy;
-    private final List<T> listeners = new ArrayList<T>();
+    private final List<T> listeners = new ArrayList<>();
 
     public Announcer(Class<? extends T> listenerType) {
         proxy = listenerType.cast(Proxy.newProxyInstance(
                 listenerType.getClassLoader(),
                 new Class<?>[]{listenerType},
                 new InvocationHandler() {
+            @Override
             public Object invoke(Object aProxy, Method method, Object[] args) throws Throwable {
                 announce(method, args);
                 return null;
@@ -58,6 +59,6 @@ public class Announcer<T extends EventListener> {
     }
 
     public static <T extends EventListener> Announcer<T> to(Class<? extends T> listenerType) {
-        return new Announcer<T>(listenerType);
+        return new Announcer<>(listenerType);
     }
 }
